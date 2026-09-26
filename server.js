@@ -1,59 +1,34 @@
-// import express from "express";
-// import dbConnect from "./config/dbConnect.js";
-// import usersRoute from "./routes/users.route.js";
-// import tasksRoute from "./routes/tasks.route.js";
-// import dotenv from "dotenv";
-// dotenv.config();
-
-// const app = express()
-// const port = 3000
-
-// app.use(express.json());
-// app.use(express.static("dist"));
-
-// app.use("/users", usersRoute);
-// app.use("/tasks", tasksRoute);
-
-// const startServer = async () => {
-//   await dbConnect();
-
-//   app.listen(port, () => {
-//     console.log(`Server listening on port ${port}`)
-//   })
-// }
-
-// startServer();
-
 import express from "express";
 import dbConnect from "./config/dbConnect.js";
 import usersRoute from "./routes/users.route.js";
 import tasksRoute from "./routes/tasks.route.js";
 import dotenv from "dotenv";
 
+import* as path from "path";
+const rootPath = process.cwd(); 
+
 dotenv.config();
 
-const app = express();
-
-const port = process.env.PORT || 3000;
+const app = express()
+const port = 3000
 
 app.use(express.json());
+app.use(express.static("dist"));
 
-app.use(express.static("public"));
-
-
+app.get("/{*any}", () => {
+  res.sendfile(path.join(rootPath, "public", "index.html"));
+});
 app.use("/users", usersRoute);
 app.use("/tasks", tasksRoute);
 
 const startServer = async () => {
-  try {
-    await dbConnect();
+  await dbConnect();
 
-    app.listen(port, () => {
-      console.log(`Server listening on port ${port}`);
-    });
-  } catch (error) {
-    console.error("Failed to start server:", error);
-  }
-};
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}`)
+  })
+}
 
 startServer();
+
+
