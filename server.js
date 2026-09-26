@@ -23,6 +23,7 @@ app.use("/tasks", tasksRoute);
 app.get("/{*any}", (req, res) => {
   res.sendFile(path.join(rootPath, "public", "index.html"));
 });
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
