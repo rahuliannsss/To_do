@@ -1,6 +1,6 @@
 
 import Users from "../schema/users.schema.js";
-import tokenUtils from "../utils/token.util.js";
+import tokenUtils from "../utils/token.utils.js";
 
 const userResponse = (user) => ({
     id: user._id,
