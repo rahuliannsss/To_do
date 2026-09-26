@@ -17,12 +17,12 @@ const port = 3000;
 app.use(express.json());
 app.use(express.static("public"));
 
-app.get("/{*any}", (req, res) => {
-  res.sendFile(path.join(rootPath, "public", "index.html"));
-});
 app.use("/users", usersRoute);
 app.use("/tasks", tasksRoute);
 
+app.get("/{*any}", (req, res) => {
+  res.sendFile(path.join(rootPath, "public", "index.html"));
+});
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
