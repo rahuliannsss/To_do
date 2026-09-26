@@ -4,13 +4,15 @@ import usersRoute from "./routes/users.route.js";
 import tasksRoute from "./routes/tasks.route.js";
 import dotenv from "dotenv";
 
-import* as path from "path";
-const rootPath = process.cwd(); 
+import * as path from "path";
+const rootPath = process.cwd();
 
 dotenv.config();
 
-const app = express()
-const port = 3000
+dbConnect();
+
+const app = express();
+const port = 3000;
 
 app.use(express.json());
 app.use(express.static("dist"));
@@ -21,14 +23,6 @@ app.get("/{*any}", () => {
 app.use("/users", usersRoute);
 app.use("/tasks", tasksRoute);
 
-const startServer = async () => {
-  await dbConnect();
-
-  app.listen(port, () => {
-    console.log(`Server listening on port ${port}`)
-  })
-}
-
-startServer();
-
-
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
