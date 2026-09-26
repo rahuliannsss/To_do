@@ -38,11 +38,8 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use(express.static("dist"));
+app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.send("Server is running successfully");
-});
 
 app.use("/users", usersRoute);
 app.use("/tasks", tasksRoute);
