@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.get("/{*any}", () => {
-  res.sendfile(path.join(rootPath, "public", "index.html"));
+  res.sendFile(path.join(rootPath, "public", "index.html"));
 });
 app.use("/users", usersRoute);
 app.use("/tasks", tasksRoute);
